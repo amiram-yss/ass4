@@ -76,6 +76,28 @@ public class Val implements Expression{
         return new Val(this.value);
     }
 
+    /**
+     * Returns the expression tree resulting from converting all the operations
+     * to the logical Nand operation.
+     *
+     * @return Expression in Nand format.
+     */
+    @Override
+    public Expression nandify() {
+        return this;
+    }
+
+    /**
+     * Returns the expression tree resulting from converting all the operations
+     * to the logical Nor operation.
+     *
+     * @return Expression in Nor format.
+     */
+    @Override
+    public Expression norify() {
+        return this;
+    }
+
     @Override
     public String toString() {
         return value ? "T" : "F";

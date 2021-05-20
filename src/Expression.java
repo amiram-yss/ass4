@@ -50,4 +50,18 @@ public interface Expression {
      *                      expression.
      */
     Expression assign(String var, Expression expression);
+
+    /**
+     * Returns the expression tree resulting from converting all the operations
+     * to the logical Nand operation.
+     * @return  Expression in Nand format.
+     */
+    Expression nandify();
+
+    /**
+     * Returns the expression tree resulting from converting all the operations
+     * to the logical Nor operation.
+     * @return  Expression in Nor format.
+     */
+    Expression norify();
 }

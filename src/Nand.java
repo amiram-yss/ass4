@@ -72,6 +72,49 @@ public class Nand extends BinaryExpression{
                 , postfix.assign(var, expression));
     }
 
+    /**
+     * Returns the expression tree resulting from converting all the operations
+     * to the logical Nand operation.
+     *
+     * @return Expression in Nand format.
+     */
+    @Override
+    public Expression nandify() {
+        return this;
+    }
+
+    /**
+     * Returns the expression tree resulting from converting all the operations
+     * to the logical Nor operation.
+     *
+     * @return Expression in Nor format.
+     */
+    @Override
+    public Expression norify() {
+        return new Nor(
+                new Nor(
+                        new Nor(
+                                super.prefix.norify()
+                                ,super.prefix.norify()
+                        )
+                        ,new Nor(
+                                super.postfix.norify()
+                                ,super.postfix.norify()
+                        )
+                )
+                ,new Nor(
+                        new Nor(
+                                super.prefix.norify()
+                                ,super.prefix.norify()
+                        )
+                        ,new Nor(
+                        super.postfix.norify()
+                        ,super.postfix.norify()
+                        )
+                )
+        );
+    }
+
     @Override
     public String toString() {
         return "("+prefix+" ↑ "+postfix+")";
