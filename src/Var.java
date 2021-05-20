@@ -12,7 +12,7 @@ public class Var implements Expression {
     /**
      * Properties.
      */
-    final protected String key;
+    private String key;
 
     /**
      * Constructor.

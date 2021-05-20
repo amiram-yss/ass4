@@ -9,7 +9,23 @@ public abstract class BinaryExpression extends BaseExpression {
     /**
      * Properties.
      */
-    protected Expression prefix;
+    private Expression prefix;
+
+    /**
+     * Getter for prefix.
+     * @return  Prefix.
+     */
+    public Expression getPrefix() {
+        return this.prefix;
+    }
+
+    /**
+     * Set prefix.
+     * @param e Expression to set.
+     */
+    public void setPrefix(Expression e) {
+        this.prefix = e;
+    }
 
     /**
      * Constructor.

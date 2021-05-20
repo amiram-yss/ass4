@@ -8,7 +8,7 @@ import java.util.Map;
  */
 public class Not extends UnaryExpression {
     /**
-     * Constructor
+     * Constructor.
      *
      * @param postfix The expression followed by NOT (~) the operator.
      */

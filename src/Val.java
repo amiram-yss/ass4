@@ -12,7 +12,7 @@ public class Val implements Expression {
     /**
      * Properties.
      */
-    protected Boolean value;
+    private final Boolean value;
 
     /**
      * Constructor.

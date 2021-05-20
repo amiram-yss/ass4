@@ -46,7 +46,7 @@ public class Nand extends BinaryExpression {
      */
     @Override
     public Boolean evaluate() throws Exception {
-        return !(super.prefix.evaluate() && super.getPostfix().evaluate());
+        return !(super.getPrefix().evaluate() && super.getPostfix().evaluate());
     }
 
     /**
@@ -59,7 +59,7 @@ public class Nand extends BinaryExpression {
         //Create the Set To Return (=str) for avoiding doubles.
         Set<String> str = new HashSet<>();
         //Gets prefix and postfix variables, and unions them.
-        str.addAll(super.prefix.getVariables());
+        str.addAll(super.getPrefix().getVariables());
         str.addAll(super.getPostfix().getVariables());
         return new ArrayList<>(str);
     }
@@ -77,7 +77,7 @@ public class Nand extends BinaryExpression {
      */
     @Override
     public Expression assign(String var, Expression expression) {
-        return new Nand(prefix.assign(var, expression),
+        return new Nand(getPrefix().assign(var, expression),
                 getPostfix().assign(var, expression));
     }
 
@@ -103,8 +103,8 @@ public class Nand extends BinaryExpression {
         return new Nor(
                 new Nor(
                         new Nor(
-                                super.prefix.norify(),
-                                super.prefix.norify()
+                                super.getPrefix().norify(),
+                                super.getPrefix().norify()
                         ),
                         new Nor(
                                 super.getPostfix().norify(),
@@ -113,8 +113,8 @@ public class Nand extends BinaryExpression {
                 ),
                 new Nor(
                     new Nor(
-                            super.prefix.norify(),
-                            super.prefix.norify()
+                            super.getPrefix().norify(),
+                            super.getPrefix().norify()
                     ),
                     new Nor(
                             super.getPostfix().norify(),
@@ -135,12 +135,12 @@ public class Nand extends BinaryExpression {
          * Since the simplified form of NAND, is negated to the simplified form
          * of AND we will create a correct form for our purpose.
          */
-        And helper = new And(prefix, getPostfix());
+        And helper = new And(getPrefix(), getPostfix());
         return new Not(helper.simplify());
     }
 
     @Override
     public String toString() {
-        return "(" + prefix + " A " + getPostfix() + ")";
+        return "(" + getPrefix() + " A " + getPostfix() + ")";
     }
 }

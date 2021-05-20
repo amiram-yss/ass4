@@ -33,7 +33,7 @@ public class Nor extends BinaryExpression {
      */
     @Override
     public Boolean evaluate(Map<String, Boolean> assignment) throws Exception {
-        return !(super.prefix.evaluate(assignment)
+        return !(super.getPrefix().evaluate(assignment)
                 || super.getPostfix().evaluate(assignment));
     }
 
@@ -59,7 +59,7 @@ public class Nor extends BinaryExpression {
         //Create the Set To Return (=str) for avoiding doubles.
         Set<String> str = new HashSet<>();
         //Gets prefix and postfix variables, and unions them.
-        str.addAll(super.prefix.getVariables());
+        str.addAll(super.getPrefix().getVariables());
         str.addAll(super.getPostfix().getVariables());
         return new ArrayList<>(str);
     }
@@ -77,7 +77,7 @@ public class Nor extends BinaryExpression {
      */
     @Override
     public Expression assign(String var, Expression expression) {
-        return new Nor(prefix.assign(var, expression), getPostfix().assign(var, expression));
+        return new Nor(getPrefix().assign(var, expression), getPostfix().assign(var, expression));
     }
 
     /**
@@ -91,16 +91,16 @@ public class Nor extends BinaryExpression {
         return new Nand(
                 new Nand(
                         new Nand(
-                                super.prefix.nandify(),
-                                super.prefix.nandify()),
+                                super.getPrefix().nandify(),
+                                super.getPrefix().nandify()),
                         new Nand(super.getPostfix().nandify(),
                                 super.getPostfix().nandify()
                         )
                 ),
                 new Nand(
                         new Nand(
-                                super.prefix.nandify(),
-                                super.prefix.nandify()),
+                                super.getPrefix().nandify(),
+                                super.getPrefix().nandify()),
                         new Nand(
                                 super.getPostfix().nandify(),
                                 super.getPostfix().nandify()
@@ -119,11 +119,11 @@ public class Nor extends BinaryExpression {
     public Expression norify() {
         return new Nor(
                 new Xnor(
-                        super.prefix.norify(),
+                        super.getPrefix().norify(),
                         super.getPostfix().norify()
                 ).norify(),
                 new Xnor(
-                        super.prefix.norify(),
+                        super.getPrefix().norify(),
                         super.getPostfix().norify()
                 ).norify()
         );
@@ -140,13 +140,13 @@ public class Nor extends BinaryExpression {
          * Since the simplified form of NOR, is negated to the simplified form
          * of OR we will create a correct form for our purpose.
          */
-        Or helper = new Or(prefix, getPostfix());
+        Or helper = new Or(getPrefix(), getPostfix());
         return new Not(helper.simplify());
     }
 
 
     @Override
     public String toString() {
-        return "(" + prefix + " V " + getPostfix() + ")";
+        return "(" + getPrefix() + " V " + getPostfix() + ")";
     }
 }
