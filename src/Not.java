@@ -29,7 +29,7 @@ public class Not extends UnaryExpression {
      */
     @Override
     public Boolean evaluate(Map<String, Boolean> assignment) throws Exception {
-        return !super.postfix.evaluate(assignment);
+        return !super.getPostfix().evaluate(assignment);
     }
 
     /**
@@ -41,7 +41,7 @@ public class Not extends UnaryExpression {
      */
     @Override
     public Boolean evaluate() throws Exception {
-        return !super.postfix.evaluate();
+        return !super.getPostfix().evaluate();
     }
 
     /**
@@ -51,7 +51,7 @@ public class Not extends UnaryExpression {
      */
     @Override
     public List<String> getVariables() {
-        return super.postfix.getVariables();
+        return super.getPostfix().getVariables();
     }
 
     /**
@@ -67,7 +67,7 @@ public class Not extends UnaryExpression {
      */
     @Override
     public Expression assign(String var, Expression expression) {
-        return new Not(super.postfix.assign(var, expression));
+        return new Not(super.getPostfix().assign(var, expression));
     }
 
     /**
@@ -78,7 +78,7 @@ public class Not extends UnaryExpression {
      */
     @Override
     public Expression nandify() {
-        return new Nand(super.postfix.nandify(), super.postfix.nandify());
+        return new Nand(super.getPostfix().nandify(), super.getPostfix().nandify());
     }
 
     /**
@@ -90,7 +90,7 @@ public class Not extends UnaryExpression {
     @Override
     public Expression norify() {
         return new Nor(
-                super.postfix.norify(), super.postfix.norify()
+                super.getPostfix().norify(), super.getPostfix().norify()
         );
     }
 
@@ -106,6 +106,6 @@ public class Not extends UnaryExpression {
 
     @Override
     public String toString() {
-        return "~(" + postfix + ")";
+        return "~(" + getPostfix() + ")";
     }
 }

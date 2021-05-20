@@ -34,7 +34,7 @@ public class And extends BinaryExpression {
     @Override
     public Boolean evaluate(Map<String, Boolean> assignment) throws Exception {
         return super.prefix.evaluate(assignment)
-                && super.postfix.evaluate(assignment);
+                && super.getPostfix().evaluate(assignment);
     }
 
     /**
@@ -46,7 +46,7 @@ public class And extends BinaryExpression {
      */
     @Override
     public Boolean evaluate() throws Exception {
-        return super.prefix.evaluate() && super.postfix.evaluate();
+        return super.getPostfix().evaluate() && super.getPostfix().evaluate();
     }
 
     /**
@@ -60,7 +60,7 @@ public class And extends BinaryExpression {
         Set<String> str = new HashSet<>();
         //Gets prefix and postfix variables, and unions them.
         str.addAll(super.prefix.getVariables());
-        str.addAll(super.postfix.getVariables());
+        str.addAll(super.getPostfix().getVariables());
         return new ArrayList<>(str);
     }
 
@@ -78,7 +78,7 @@ public class And extends BinaryExpression {
     @Override
     public Expression assign(String var, Expression expression) {
         return new And(prefix.assign(var, expression),
-                postfix.assign(var, expression));
+                getPostfix().assign(var, expression));
     }
 
     /**
@@ -92,11 +92,11 @@ public class And extends BinaryExpression {
         return new Nand(
                 new Nand(
                         super.prefix.nandify(),
-                        super.postfix.nandify()
+                        super.getPostfix().nandify()
                 ),
                 new Nand(
                         super.prefix.nandify(),
-                        super.postfix.nandify()
+                        super.getPostfix().nandify()
                 )
         );
     }
@@ -115,8 +115,8 @@ public class And extends BinaryExpression {
                         super.prefix.norify()
                 ),
                 new Nor(
-                        super.postfix.norify(),
-                        super.postfix.norify()
+                        super.getPostfix().norify(),
+                        super.getPostfix().norify()
                 )
         );
     }
@@ -132,7 +132,7 @@ public class And extends BinaryExpression {
         Expression prefixExpressionSimplified = this.prefix.simplify();
         ExpressionType prefixType
                 = Expression.getExpressionType(prefixExpressionSimplified);
-        Expression postfixExpressionSimplified = this.postfix.simplify();
+        Expression postfixExpressionSimplified = this.getPostfix().simplify();
         ExpressionType postfixType
                 = Expression.getExpressionType(postfixExpressionSimplified);
         // If "expression & expression" occurs, return "expression" (x&x=x).
@@ -140,14 +140,14 @@ public class And extends BinaryExpression {
             return postfixExpressionSimplified;
         }
         // If both expressions are Vals, an evaluation can be made. Return it.
-        if (prefixType == ExpressionType.Val
-                && postfixType == ExpressionType.Val) {
+        if (prefixType == ExpressionType.Val && postfixType == ExpressionType.Val) {
             return new Val(this.evaluate());
         }
         // If (expression & T) occurs, return expression (e & T = e).
         if (prefixType == ExpressionType.Val) {
-            if (prefixExpressionSimplified.toString().equals(TRUE_EXPRESSION))
+            if (prefixExpressionSimplified.toString().equals(TRUE_EXPRESSION)) {
                 return postfixExpressionSimplified;
+            }
         } else {
                 // Return false for (e & F = F)
                 return new Val(false);
@@ -171,6 +171,6 @@ public class And extends BinaryExpression {
 
     @Override
     public String toString() {
-        return "(" + prefix + " & " + postfix + ")";
+        return "(" + prefix + " & " + getPostfix() + ")";
     }
 }

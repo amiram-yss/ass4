@@ -7,7 +7,15 @@ public abstract class BaseExpression implements Expression {
     /**
      * Postfix value, the expression followed by the operator.
      */
-    protected final Expression postfix;
+    private final Expression postfix;
+
+    /**
+     * Postfix getter.
+     * @return Postfix
+     */
+    public Expression getPostfix() {
+        return this.postfix;
+    }
 
     /**
      * Constructor.
