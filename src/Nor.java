@@ -1,11 +1,15 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Amiram Yassif
  * 314985474
  * ASS4
  */
-public class Nor extends BinaryExpression{
+public class Nor extends BinaryExpression {
     /**
      * Constructor.
      *
@@ -73,8 +77,7 @@ public class Nor extends BinaryExpression{
      */
     @Override
     public Expression assign(String var, Expression expression) {
-        return new Nor(prefix.assign(var, expression)
-                , postfix.assign(var, expression));
+        return new Nor(prefix.assign(var, expression), postfix.assign(var, expression));
     }
 
     /**
@@ -88,22 +91,21 @@ public class Nor extends BinaryExpression{
         return new Nand(
                 new Nand(
                         new Nand(
-                                super.prefix.nandify()
-                                ,super.prefix.nandify())
-                        ,new Nand(
+                                super.prefix.nandify(),
+                                super.prefix.nandify()),
+                        new Nand(super.postfix.nandify(),
                                 super.postfix.nandify()
-                                ,super.postfix.nandify()
-                )
-                )
-                ,new Nand(
+                        )
+                ),
+                new Nand(
                         new Nand(
-                                super.prefix.nandify()
-                                ,super.prefix.nandify())
-                        ,new Nand(
-                        super.postfix.nandify()
-                        ,super.postfix.nandify()
-        )
-        )
+                                super.prefix.nandify(),
+                                super.prefix.nandify()),
+                        new Nand(
+                                super.postfix.nandify(),
+                                super.postfix.nandify()
+                        )
+                )
         );
     }
 
@@ -117,12 +119,12 @@ public class Nor extends BinaryExpression{
     public Expression norify() {
         return new Nor(
                 new Xnor(
-                        super.prefix.norify()
-                        ,super.postfix.norify()
-                ).norify()
-                ,new Xnor(
-                        super.prefix.norify()
-                        ,super.postfix.norify()
+                        super.prefix.norify(),
+                        super.postfix.norify()
+                ).norify(),
+                new Xnor(
+                        super.prefix.norify(),
+                        super.postfix.norify()
                 ).norify()
         );
     }
@@ -133,18 +135,18 @@ public class Nor extends BinaryExpression{
      * @return Simplified version of the expression.
      */
     @Override
-    public Expression simplify() throws Exception{
+    public Expression simplify() throws Exception {
         /*
          * Since the simplified form of NOR, is negated to the simplified form
          * of OR we will create a correct form for our purpose.
          */
-        Or helper = new Or(prefix,postfix);
+        Or helper = new Or(prefix, postfix);
         return new Not(helper.simplify());
     }
 
 
     @Override
     public String toString() {
-        return "("+prefix+" V "+postfix+")";
+        return "(" + prefix + " V " + postfix + ")";
     }
 }

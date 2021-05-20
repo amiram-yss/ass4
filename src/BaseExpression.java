@@ -3,15 +3,16 @@
  * 314985474
  * ASS4
  */
-public abstract class BaseExpression implements Expression{
+public abstract class BaseExpression implements Expression {
     /**
-     * Postfix value, the expression followed by the NOT operator (~);
+     * Postfix value, the expression followed by the operator.
      */
     protected final Expression postfix;
 
     /**
      * Constructor.
-     * @param postfix   The expression following an operator.
+     *
+     * @param postfix The expression following an operator.
      */
     protected BaseExpression(Expression postfix) {
         this.postfix = postfix;

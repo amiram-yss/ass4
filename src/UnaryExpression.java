@@ -6,6 +6,7 @@
 public abstract class UnaryExpression extends BaseExpression {
     /**
      * Constructor.
+     *
      * @param postfix The expression following the operator.
      */
     protected UnaryExpression(Expression postfix) {

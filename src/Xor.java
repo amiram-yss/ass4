@@ -1,20 +1,26 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Amiram Yassif
  * 314985474
  * ASS4
  */
-public class Xor extends BinaryExpression{
+public class Xor extends BinaryExpression {
     /**
      * Solves a simple XOR expression.
-     * @param b1    Binary value 1.
-     * @param b2    Binary value 2.
-     * @return      XOR result for (b1 ^ b2).
+     *
+     * @param b1 Binary value 1.
+     * @param b2 Binary value 2.
+     * @return XOR result for (b1 ^ b2).
      */
     private static Boolean simpleXorSolver(Boolean b1, Boolean b2) {
         return (b1 && !b2) || (!b1 && b2);
     }
+
     /**
      * Constructor.
      *
@@ -38,9 +44,9 @@ public class Xor extends BinaryExpression{
      */
     @Override
     public Boolean evaluate(Map<String, Boolean> assignment) throws Exception {
-        return simpleXorSolver
-                (super.prefix.evaluate(assignment)
-                        ,super.postfix.evaluate(assignment));
+        return simpleXorSolver(
+                super.prefix.evaluate(assignment),
+                super.postfix.evaluate(assignment));
     }
 
     /**
@@ -52,9 +58,9 @@ public class Xor extends BinaryExpression{
      */
     @Override
     public Boolean evaluate() throws Exception {
-        return simpleXorSolver
-                (super.prefix.evaluate()
-                        , super.postfix.evaluate());
+        return simpleXorSolver(
+                super.prefix.evaluate(),
+                super.postfix.evaluate());
     }
 
     /**
@@ -85,8 +91,8 @@ public class Xor extends BinaryExpression{
      */
     @Override
     public Expression assign(String var, Expression expression) {
-        return new Xor(prefix.assign(var, expression)
-                , postfix.assign(var, expression));
+        return new Xor(prefix.assign(var, expression),
+                postfix.assign(var, expression));
     }
 
     /**
@@ -99,18 +105,18 @@ public class Xor extends BinaryExpression{
     public Expression nandify() {
         return new Nand(
                 new Nand(
-                        super.prefix.nandify()
-                        ,new Nand(
-                                super.prefix.nandify()
-                                ,super.postfix.nandify()
+                        super.prefix.nandify(),
+                        new Nand(
+                                super.prefix.nandify(),
+                                super.postfix.nandify()
                         )
-                )
-                ,new Nand(
-                    super.postfix.nandify()
-                    ,new Nand(
-                            super.prefix.nandify()
-                            ,super.postfix.nandify()
-                    )
+                ),
+                new Nand(
+                        super.postfix.nandify(),
+                                new Nand(
+                                        super.prefix.nandify(),
+                                        super.postfix.nandify()
+                                )
                 )
         );
     }
@@ -126,23 +132,23 @@ public class Xor extends BinaryExpression{
         return new Nor(
                 new Nor(
                         new Nor(
+                                super.prefix.norify(),
                                 super.prefix.norify()
-                                ,super.prefix.norify()
-                        )
-                        ,new Nor(
+                        ),
+                        new Nor(
+                                super.postfix.norify(),
                                 super.postfix.norify()
-                                ,super.postfix.norify()
                         )
-                )
-                ,new Nor(
-                        super.prefix.norify()
-                        ,super.postfix.norify()
+                ),
+                new Nor(
+                        super.prefix.norify(),
+                        super.postfix.norify()
                 )
         );
     }
 
     /**
-     /**
+     * /**
      * Returned a simplified version of the current expression.
      *
      * @return Simplified version of the expression.
@@ -157,39 +163,43 @@ public class Xor extends BinaryExpression{
         ExpressionType postfixType
                 = Expression.getExpressionType(postfixExpressionSimplified);
         // If "expression ^ expression" occurs, return False (x^x=F).
-        if (prefixExpressionSimplified.equals(postfixExpressionSimplified))
+        if (prefixExpressionSimplified.equals(postfixExpressionSimplified)) {
             return new Val(false);
+        }
         // If both expressions are Vals, an evaluation can be made. Return it.
         if (prefixType == ExpressionType.Val
-                && postfixType == ExpressionType.Val)
+                && postfixType == ExpressionType.Val) {
             return new Val(this.evaluate());
+        }
         // If (expression ^ F) occurs, return expression (e ^ F = e).
-        if (prefixType == ExpressionType.Val){
-            if(prefixExpressionSimplified.toString().equals(FALSE_EXPRESSION))
+        if (prefixType == ExpressionType.Val) {
+            if (prefixExpressionSimplified.toString().equals(FALSE_EXPRESSION)) {
                 return postfixExpressionSimplified;
                 // Otherwise wh have a (expression ^ T) situation.
-            else
+            } else {
                 // Return true (e ^ T = ~T)
                 return new Not(postfixExpressionSimplified);
+            }
         }
         //Same method as before, but for the postfix.
-        if (postfixType == ExpressionType.Val){
-            if(postfixExpressionSimplified.toString().equals(FALSE_EXPRESSION))
+        if (postfixType == ExpressionType.Val) {
+            if (postfixExpressionSimplified.toString().equals(FALSE_EXPRESSION)) {
                 return prefixExpressionSimplified;
                 // Otherwise wh have a (expression ^ T) situation.
-            else
+            } else {
                 // Return true (e ^ T = ~T)
                 return new Not(prefixExpressionSimplified);
+            }
         }
         /*
          *   If non of the situations above has occurred,
          *   no simplification can be made. So no changes will be made.
          */
-        return new Xor(prefixExpressionSimplified,postfixExpressionSimplified);
+        return new Xor(prefixExpressionSimplified, postfixExpressionSimplified);
     }
 
     @Override
     public String toString() {
-        return "("+prefix+" ^ "+postfix+")";
+        return "(" + prefix + " ^ " + postfix + ")";
     }
 }

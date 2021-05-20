@@ -1,16 +1,21 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Amiram Yassif
  * 314985474
  * ASS4
  */
-public class Xnor extends BinaryExpression{
+public class Xnor extends BinaryExpression {
     /**
      * Solves a simple XNOR expression.
-     * @param b1    Binary value 1.
-     * @param b2    Binary value 2.
-     * @return      XOR result for (b1 # b2).
+     *
+     * @param b1 Binary value 1.
+     * @param b2 Binary value 2.
+     * @return XOR result for (b1 # b2).
      */
     private static Boolean simpleXnorSolver(Boolean b1, Boolean b2) {
         return b1.booleanValue() == b2.booleanValue();
@@ -39,8 +44,8 @@ public class Xnor extends BinaryExpression{
      */
     @Override
     public Boolean evaluate(Map<String, Boolean> assignment) throws Exception {
-        return simpleXnorSolver(super.prefix.evaluate(assignment)
-                ,super.postfix.evaluate(assignment));
+        return simpleXnorSolver(super.prefix.evaluate(assignment),
+                super.postfix.evaluate(assignment));
     }
 
     /**
@@ -52,8 +57,9 @@ public class Xnor extends BinaryExpression{
      */
     @Override
     public Boolean evaluate() throws Exception {
-        return simpleXnorSolver
-                (super.prefix.evaluate(), super.postfix.evaluate());
+        return simpleXnorSolver(
+                super.prefix.evaluate(),
+                super.postfix.evaluate());
     }
 
     /**
@@ -84,8 +90,8 @@ public class Xnor extends BinaryExpression{
      */
     @Override
     public Expression assign(String var, Expression expression) {
-        return new Xnor(prefix.assign(var, expression)
-                , postfix.assign(var, expression));
+        return new Xnor(prefix.assign(var, expression),
+                postfix.assign(var, expression));
     }
 
     /**
@@ -97,10 +103,10 @@ public class Xnor extends BinaryExpression{
     @Override
     public Expression nandify() {
         return new Nand(
-                new Xor(super.prefix.nandify()
-                ,super.postfix.nandify()).nandify()
-                , new Xor(super.prefix.nandify()
-                ,super.postfix.nandify()).nandify()
+                new Xor(super.prefix.nandify(),
+                        super.postfix.nandify()).nandify(),
+                new Xor(super.prefix.nandify(),
+                super.postfix.nandify()).nandify()
         );
     }
 
@@ -114,18 +120,18 @@ public class Xnor extends BinaryExpression{
     public Expression norify() {
         return new Nor(
                 new Nor(
-                        super.prefix.norify()
-                        ,new Nor(
-                                super.prefix.norify()
-                                ,super.postfix.norify()
+                        super.prefix.norify(),
+                        new Nor(
+                                super.prefix.norify(),
+                                super.postfix.norify()
                         )
-                )
-                ,new Nor(
-                        super.postfix.norify()
-                        ,new Nor(
-                                super.prefix.norify()
-                                ,super.postfix.norify()
-                        )
+                ),
+                new Nor(
+                    super.postfix.norify(),
+                    new Nor(
+                            super.prefix.norify(),
+                            super.postfix.norify()
+                    )
                 )
         );
     }
@@ -136,7 +142,7 @@ public class Xnor extends BinaryExpression{
      * @return Simplified version of the expression.
      */
     @Override
-    public Expression simplify() throws Exception{
+    public Expression simplify() throws Exception {
         // Store simplified data, and get each type (Val, Var, Complex).
         Expression prefixExpressionSimplified = this.prefix.simplify();
         ExpressionType prefixType
@@ -145,21 +151,23 @@ public class Xnor extends BinaryExpression{
         ExpressionType postfixType
                 = Expression.getExpressionType(postfixExpressionSimplified);
         // If "expression & expression" occurs, return "expression" (x&x=x).
-        if (prefixExpressionSimplified.equals(postfixExpressionSimplified))
+        if (prefixExpressionSimplified.equals(postfixExpressionSimplified)) {
             return postfixExpressionSimplified;
+        }
         // If both expressions are Vals, an evaluation can be made. Return it.
         if (prefixType == ExpressionType.Val
-                && postfixType == ExpressionType.Val)
+                && postfixType == ExpressionType.Val) {
             return new Val(this.evaluate());
+        }
         /*
          *   If non of the situations above has occurred,
          *   no simplification can be made. So no changes will be made.
          */
-        return new Xor(prefixExpressionSimplified,postfixExpressionSimplified);
+        return new Xor(prefixExpressionSimplified, postfixExpressionSimplified);
     }
 
     @Override
     public String toString() {
-        return "("+prefix+" # "+postfix+")";
+        return "(" + prefix + " # " + postfix + ")";
     }
 }

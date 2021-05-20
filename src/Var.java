@@ -1,4 +1,6 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Amiram Yassif
@@ -14,7 +16,8 @@ public class Var implements Expression {
 
     /**
      * Constructor.
-     * @param key   The name of the variable.
+     *
+     * @param key The name of the variable.
      */
     public Var(String key) {
         this.key = key;
@@ -33,9 +36,10 @@ public class Var implements Expression {
      */
     @Override
     public Boolean evaluate(Map<String, Boolean> assignment) throws Exception {
-        if (!assignment.containsKey(this.key))
-            throw new Exception
-                    ("Exception thrown: Key \""+key+"\" not found in map.");
+        if (!assignment.containsKey(this.key)) {
+            throw new Exception(
+                    "Exception thrown: Key \"" + key + "\" not found in map.");
+        }
         return assignment.get(this.key);
     }
 
@@ -48,8 +52,8 @@ public class Var implements Expression {
      */
     @Override
     public Boolean evaluate() throws Exception {
-        throw new Exception
-                ("Exception thrown: Cannot resolve with an empty map.");
+        throw new Exception(
+                "Exception thrown: Cannot resolve with an empty map.");
     }
 
     /**
@@ -77,8 +81,9 @@ public class Var implements Expression {
      */
     @Override
     public Expression assign(String var, Expression expression) {
-        if(this.key.equals(var))
+        if (this.key.equals(var)) {
             return expression;
+        }
         return this;
     }
 
@@ -117,17 +122,19 @@ public class Var implements Expression {
 
     /**
      * Returns a nice string representation of the expression.
+     *
      * @return A nice string representation of the expression.
      */
     @Override
-    public String toString(){
+    public String toString() {
         return this.key;
     }
 
     /**
      * Checks if two expressions are equal.
-     * @param e     The expression
-     * @return      True if has equal variables, False otherwise.
+     *
+     * @param e The expression
+     * @return True if has equal variables, False otherwise.
      */
     @Override
     public boolean equals(Expression e) {

@@ -1,11 +1,15 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Amiram Yassif
  * 314985474
  * ASS4
  */
-public class Nand extends BinaryExpression{
+public class Nand extends BinaryExpression {
     /**
      * Constructor.
      *
@@ -73,8 +77,8 @@ public class Nand extends BinaryExpression{
      */
     @Override
     public Expression assign(String var, Expression expression) {
-        return new Nand(prefix.assign(var, expression)
-                , postfix.assign(var, expression));
+        return new Nand(prefix.assign(var, expression),
+                postfix.assign(var, expression));
     }
 
     /**
@@ -99,23 +103,23 @@ public class Nand extends BinaryExpression{
         return new Nor(
                 new Nor(
                         new Nor(
+                                super.prefix.norify(),
                                 super.prefix.norify()
-                                ,super.prefix.norify()
-                        )
-                        ,new Nor(
-                                super.postfix.norify()
-                                ,super.postfix.norify()
-                        )
-                )
-                ,new Nor(
+                        ),
                         new Nor(
-                                super.prefix.norify()
-                                ,super.prefix.norify()
+                                super.postfix.norify(),
+                                super.postfix.norify()
                         )
-                        ,new Nor(
-                        super.postfix.norify()
-                        ,super.postfix.norify()
-                        )
+                ),
+                new Nor(
+                    new Nor(
+                            super.prefix.norify(),
+                            super.prefix.norify()
+                    ),
+                    new Nor(
+                            super.postfix.norify(),
+                            super.postfix.norify()
+                    )
                 )
         );
     }
@@ -131,12 +135,12 @@ public class Nand extends BinaryExpression{
          * Since the simplified form of NAND, is negated to the simplified form
          * of AND we will create a correct form for our purpose.
          */
-        And helper = new And(prefix,postfix);
+        And helper = new And(prefix, postfix);
         return new Not(helper.simplify());
     }
 
     @Override
     public String toString() {
-        return "("+prefix+" A "+postfix+")";
+        return "(" + prefix + " A " + postfix + ")";
     }
 }

@@ -1,11 +1,15 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Amiram Yassif
  * 314985474
  * ASS4
  */
-public class Or extends BinaryExpression{
+public class Or extends BinaryExpression {
     /**
      * Constructor.
      *
@@ -73,8 +77,8 @@ public class Or extends BinaryExpression{
      */
     @Override
     public Expression assign(String var, Expression expression) {
-        return new Or(prefix.assign(var, expression)
-                , postfix.assign(var, expression));
+        return new Or(prefix.assign(var, expression),
+                postfix.assign(var, expression));
     }
 
     /**
@@ -86,14 +90,14 @@ public class Or extends BinaryExpression{
     @Override
     public Expression nandify() {
         return new Nand(
-            new Nand(
-                super.prefix.nandify()
-                ,super.prefix.nandify()
-            )
-            ,new Nand(
+                new Nand(
+                        super.prefix.nandify(),
+                        super.prefix.nandify()
+                ),
+                new Nand(
+                super.postfix.nandify(),
                 super.postfix.nandify()
-                ,super.postfix.nandify()
-            )
+        )
         );
     }
 
@@ -107,13 +111,13 @@ public class Or extends BinaryExpression{
     public Expression norify() {
         return new Nor(
                 new Nor(
-                        super.prefix.norify()
-                        ,super.postfix.norify()
-                )
-                ,new Nor(
-                        super.prefix.norify()
-                        ,super.postfix.norify()
-                )
+                        super.prefix.norify(),
+                        super.postfix.norify()
+                ),
+                new Nor(
+                super.prefix.norify(),
+                super.postfix.norify()
+        )
         );
     }
 
@@ -132,39 +136,41 @@ public class Or extends BinaryExpression{
         ExpressionType postfixType
                 = Expression.getExpressionType(postfixExpressionSimplified);
         // If "expression | expression" occurs, return "expression" (x|x=x).
-        if (prefixExpressionSimplified.equals(postfixExpressionSimplified))
+        if (prefixExpressionSimplified.equals(postfixExpressionSimplified)) {
             return postfixExpressionSimplified;
+        }
         // If both expressions are Vals, an evaluation can be made. Return it.
         if (prefixType == ExpressionType.Val
-                && postfixType == ExpressionType.Val)
+                && postfixType == ExpressionType.Val) {
             return new Val(this.evaluate());
+        }
         // If (expression | F) occurs, return expression (e | F = e).
-        if (prefixType == ExpressionType.Val){
-            if(prefixExpressionSimplified.toString().equals(FALSE_EXPRESSION))
+        if (prefixType == ExpressionType.Val) {
+            if (prefixExpressionSimplified.toString().equals(FALSE_EXPRESSION)) {
                 return postfixExpressionSimplified;
-                // Otherwise wh have a (expression | T) situation.
-            else
+            } else {
                 // Return true (e | T = T)
                 return new Val(true);
+            }
         }
         //Same method as before, but for the postfix.
-        if (postfixType == ExpressionType.Val){
-            if(postfixExpressionSimplified.toString().equals(FALSE_EXPRESSION))
+        if (postfixType == ExpressionType.Val) {
+            if (postfixExpressionSimplified.toString().equals(FALSE_EXPRESSION)) {
                 return prefixExpressionSimplified;
-                // Otherwise wh have a (expression | T) situation.
-            else
-                // Return false (e | T = T)
+            } else {
+                // Return true for (e | T = T)
                 return new Val(true);
+            }
         }
         /*
             If non of the situations above has occurred,
             no simplification can be made. So no changes will be made.
          */
-        return new Or(prefixExpressionSimplified,postfixExpressionSimplified);
+        return new Or(prefixExpressionSimplified, postfixExpressionSimplified);
     }
 
     @Override
     public String toString() {
-        return "("+prefix+" | "+postfix+")";
+        return "(" + prefix + " | " + postfix + ")";
     }
 }

@@ -113,7 +113,7 @@ public interface Expression {
      * @param e The expression.
      * @return  True if evaluate() will run properly. False otherwise.
      */
-    public static boolean evaluateable(Expression e) {
+    static boolean evaluateable(Expression e) {
         // Try to run evaluate.
         try {
             // If operation succeeded, return True.

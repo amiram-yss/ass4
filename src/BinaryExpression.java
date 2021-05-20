@@ -6,15 +6,16 @@
 public abstract class BinaryExpression extends BaseExpression {
 
 
-
     /**
-     * Properties
+     * Properties.
      */
     protected Expression prefix;
+
     /**
      * Constructor.
-     * @param prefix    The expression followed by the operator.
-     * @param postfix   The expression following the operator.
+     *
+     * @param prefix  The expression followed by the operator.
+     * @param postfix The expression following the operator.
      */
     protected BinaryExpression(Expression prefix, Expression postfix) {
         super(postfix);

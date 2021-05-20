@@ -6,7 +6,7 @@ import java.util.Map;
  * 314985474
  * ASS4
  */
-public class Not extends UnaryExpression{
+public class Not extends UnaryExpression {
     /**
      * Constructor
      *
@@ -78,7 +78,7 @@ public class Not extends UnaryExpression{
      */
     @Override
     public Expression nandify() {
-        return new Nand(super.postfix.nandify(),super.postfix.nandify());
+        return new Nand(super.postfix.nandify(), super.postfix.nandify());
     }
 
     /**
@@ -90,8 +90,7 @@ public class Not extends UnaryExpression{
     @Override
     public Expression norify() {
         return new Nor(
-                super.postfix.norify()
-                ,super.postfix.norify()
+                super.postfix.norify(), super.postfix.norify()
         );
     }
 

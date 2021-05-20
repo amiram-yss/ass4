@@ -1,11 +1,15 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Amiram Yassif
  * 314985474
  * ASS4
  */
-public class And extends BinaryExpression{
+public class And extends BinaryExpression {
     /**
      * Constructor.
      *
@@ -73,8 +77,8 @@ public class And extends BinaryExpression{
      */
     @Override
     public Expression assign(String var, Expression expression) {
-        return new And(prefix.assign(var, expression)
-                , postfix.assign(var, expression));
+        return new And(prefix.assign(var, expression),
+                postfix.assign(var, expression));
     }
 
     /**
@@ -86,13 +90,15 @@ public class And extends BinaryExpression{
     @Override
     public Expression nandify() {
         return new Nand(
-            new Nand(
-                    super.prefix.nandify()
-                    ,super.postfix.nandify())
-            ,new Nand(
-                    super.prefix.nandify()
-                    ,super.postfix.nandify()
-        ));
+                new Nand(
+                        super.prefix.nandify(),
+                        super.postfix.nandify()
+                ),
+                new Nand(
+                        super.prefix.nandify(),
+                        super.postfix.nandify()
+                )
+        );
     }
 
     /**
@@ -105,12 +111,12 @@ public class And extends BinaryExpression{
     public Expression norify() {
         return new Nor(
                 new Nor(
+                        super.prefix.norify(),
                         super.prefix.norify()
-                        ,super.prefix.norify()
-                )
-                ,new Nor(
+                ),
+                new Nor(
+                        super.postfix.norify(),
                         super.postfix.norify()
-                        ,super.postfix.norify()
                 )
         );
     }
@@ -130,39 +136,41 @@ public class And extends BinaryExpression{
         ExpressionType postfixType
                 = Expression.getExpressionType(postfixExpressionSimplified);
         // If "expression & expression" occurs, return "expression" (x&x=x).
-        if (prefixExpressionSimplified.equals(postfixExpressionSimplified))
+        if (prefixExpressionSimplified.equals(postfixExpressionSimplified)) {
             return postfixExpressionSimplified;
+        }
         // If both expressions are Vals, an evaluation can be made. Return it.
         if (prefixType == ExpressionType.Val
-                && postfixType == ExpressionType.Val)
+                && postfixType == ExpressionType.Val) {
             return new Val(this.evaluate());
+        }
         // If (expression & T) occurs, return expression (e & T = e).
-        if (prefixType == ExpressionType.Val){
-            if(prefixExpressionSimplified.toString().equals(TRUE_EXPRESSION))
+        if (prefixType == ExpressionType.Val) {
+            if (prefixExpressionSimplified.toString().equals(TRUE_EXPRESSION))
                 return postfixExpressionSimplified;
-            // Otherwise wh have a (expression & F) situation.
-            else
-                // Return false (e & F = F)
+        } else {
+                // Return false for (e & F = F)
                 return new Val(false);
         }
         //Same method as before, but for the postfix.
-        if (postfixType == ExpressionType.Val){
-            if(postfixExpressionSimplified.toString().equals(TRUE_EXPRESSION))
+        if (postfixType == ExpressionType.Val) {
+            if (postfixExpressionSimplified.toString().equals(TRUE_EXPRESSION)) {
                 return prefixExpressionSimplified;
                 // Otherwise wh have a (expression & F) situation.
-            else
+            } else {
                 // Return false (e & F = F)
                 return new Val(false);
+            }
         }
         /*
             If non of the situations above has occurred,
             no simplification can be made. So no changes will be made.
          */
-        return new And(prefixExpressionSimplified,postfixExpressionSimplified);
+        return new And(prefixExpressionSimplified, postfixExpressionSimplified);
     }
 
     @Override
     public String toString() {
-        return "("+prefix+" & "+postfix+")";
+        return "(" + prefix + " & " + postfix + ")";
     }
 }

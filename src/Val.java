@@ -8,17 +8,18 @@ import java.util.Map;
  * ASS4
  * @version 0.1
  */
-public class Val implements Expression{
+public class Val implements Expression {
     /**
-     * Properties
+     * Properties.
      */
     protected Boolean value;
 
     /**
-     * Constructor
-     * @param val   Boolean fixed value (True/ False).
+     * Constructor.
+     *
+     * @param val Boolean fixed value (True/ False).
      */
-    public Val(Boolean val){
+    public Val(Boolean val) {
         this.value = val;
     }
 
@@ -110,6 +111,7 @@ public class Val implements Expression{
 
     /**
      * Returns a nice string representation of the expression.
+     *
      * @return A nice string representation of the expression.
      */
     @Override
@@ -119,8 +121,9 @@ public class Val implements Expression{
 
     /**
      * Checks if two expressions are equal.
-     * @param e     The expression
-     * @return      True if has equal variables, False otherwise.
+     *
+     * @param e The expression
+     * @return True if has equal variables, False otherwise.
      */
     @Override
     public boolean equals(Expression e) {
