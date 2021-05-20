@@ -1,7 +1,10 @@
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
+/**
+ * @author Amiram Yassif
+ * 314985474
+ * ASS4
+ */
 public class And extends BinaryExpression{
     /**
      * Constructor.
@@ -110,6 +113,52 @@ public class And extends BinaryExpression{
                         ,super.postfix.norify()
                 )
         );
+    }
+
+    /**
+     * Returned a simplified version of the current expression.
+     *
+     * @return Simplified version of the expression.
+     */
+    @Override
+    public Expression simplify() throws Exception {
+        // Store simplified data, and get each type (Val, Var, Complex).
+        Expression prefixExpressionSimplified = this.prefix.simplify();
+        ExpressionType prefixType
+                = Expression.getExpressionType(prefixExpressionSimplified);
+        Expression postfixExpressionSimplified = this.postfix.simplify();
+        ExpressionType postfixType
+                = Expression.getExpressionType(postfixExpressionSimplified);
+        // If "expression & expression" occurs, return "expression" (x&x=x).
+        if (prefixExpressionSimplified.equals(postfixExpressionSimplified))
+            return postfixExpressionSimplified;
+        // If both expressions are Vals, an evaluation can be made. Return it.
+        if (prefixType == ExpressionType.Val
+                && postfixType == ExpressionType.Val)
+            return new Val(this.evaluate());
+        // If (expression & T) occurs, return expression (e & T = e).
+        if (prefixType == ExpressionType.Val){
+            if(prefixExpressionSimplified.toString().equals(TRUE_EXPRESSION))
+                return postfixExpressionSimplified;
+            // Otherwise wh have a (expression & F) situation.
+            else
+                // Return false (e & F = F)
+                return new Val(false);
+        }
+        //Same method as before, but for the postfix.
+        if (postfixType == ExpressionType.Val){
+            if(postfixExpressionSimplified.toString().equals(TRUE_EXPRESSION))
+                return prefixExpressionSimplified;
+                // Otherwise wh have a (expression & F) situation.
+            else
+                // Return false (e & F = F)
+                return new Val(false);
+        }
+        /*
+            If non of the situations above has occurred,
+            no simplification can be made. So no changes will be made.
+         */
+        return new And(prefixExpressionSimplified,postfixExpressionSimplified);
     }
 
     @Override

@@ -1,11 +1,16 @@
 import java.util.*;
 
+/**
+ * @author Amiram Yassif
+ * 314985474
+ * ASS4
+ */
 public class Nor extends BinaryExpression{
     /**
      * Constructor.
      *
-     * @param prefix  The expression followed by NOR (↓) the operator.
-     * @param postfix The expression following the NOR (↓) operator.
+     * @param prefix  The expression followed by NOR (V) the operator.
+     * @param postfix The expression following the NOR (V) operator.
      */
     protected Nor(Expression prefix, Expression postfix) {
         super(prefix, postfix);
@@ -122,8 +127,24 @@ public class Nor extends BinaryExpression{
         );
     }
 
+    /**
+     * Returned a simplified version of the current expression.
+     *
+     * @return Simplified version of the expression.
+     */
+    @Override
+    public Expression simplify() throws Exception{
+        /*
+         * Since the simplified form of NOR, is negated to the simplified form
+         * of OR we will create a correct form for our purpose.
+         */
+        Or helper = new Or(prefix,postfix);
+        return new Not(helper.simplify());
+    }
+
+
     @Override
     public String toString() {
-        return "("+prefix+" ↓ "+postfix+")";
+        return "("+prefix+" V "+postfix+")";
     }
 }

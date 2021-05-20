@@ -8,6 +8,12 @@ import java.util.Map;
  */
 public interface Expression {
     /**
+     * Constants
+     */
+    final String    FALSE_EXPRESSION                = "F";
+    final String    TRUE_EXPRESSION                 = "T";
+    final short     SIMPLE_EXPRESSION_STRING_LENGTH = 1;
+    /**
      * Evaluate the expression using the variable values provided
      * in the assignment, and return the result. If the expression
      * contains a variable which is not in the assignment, an exception
@@ -64,4 +70,58 @@ public interface Expression {
      * @return  Expression in Nor format.
      */
     Expression norify();
+
+    /**
+     * Returned a simplified version of the current expression.
+     * @return  Simplified version of the expression.
+     */
+    Expression simplify() throws Exception;
+
+    /**
+     * Checks if two expressions are equal.
+     * @param e     The expression
+     * @return      True if has equal variables, False otherwise.
+     */
+    public boolean equals(Expression e);
+
+    /**
+     * Returns if an expression is a Var, Val, or a complex expression.
+     * @param e The expression
+     * @return  If e is an instance of:
+     *          val     ->  ExpressionType.Val
+     *          var     ->  ExpressionType.Var
+     *          Complex ->  ExpressionType.Complex
+     */
+    public static ExpressionType getExpressionType(Expression e) {
+        String expressionStringRepresentation = e.toString();
+        // If string representation is longer than 1 dig, it's complex.
+        if (expressionStringRepresentation.length()
+                != SIMPLE_EXPRESSION_STRING_LENGTH)
+            return ExpressionType.Complex;
+        // If the string representation is T/F, it means it's a Val.
+        if (e.toString().equals(TRUE_EXPRESSION)
+            || e.toString().equals(FALSE_EXPRESSION))
+            return ExpressionType.Val;
+        // Otherwise, it's a Var.
+        return ExpressionType.Var;
+    }
+
+    /**
+     * Checks if an expression is evaluateable, which means it doesn't include
+     * Vals and complex only (no Vars are included), and therefore, it is
+     * possible to run evaluate() without getting an exception.
+     * @param e The expression.
+     * @return  True if evaluate() will run properly. False otherwise.
+     */
+    public static boolean evaluateable(Expression e) {
+        // Try to run evaluate.
+        try {
+            // If operation succeeded, return True.
+            e.evaluate();
+            return true;
+        } catch (Exception ex) {
+            //If failed, return False.
+            return false;
+        }
+    }
 }

@@ -11,9 +11,14 @@ public abstract class BaseExpression implements Expression{
 
     /**
      * Constructor.
-     * @param postfix   The expression following the NOT (~) operator.
+     * @param postfix   The expression following an operator.
      */
     protected BaseExpression(Expression postfix) {
         this.postfix = postfix;
+    }
+
+    @Override
+    public boolean equals(Expression e) {
+        return this.toString().equals(e.toString());
     }
 }

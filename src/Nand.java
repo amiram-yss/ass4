@@ -1,11 +1,16 @@
 import java.util.*;
 
+/**
+ * @author Amiram Yassif
+ * 314985474
+ * ASS4
+ */
 public class Nand extends BinaryExpression{
     /**
      * Constructor.
      *
-     * @param prefix  The expression followed by NAND (↑) the operator.
-     * @param postfix The expression following the NAND (↑) operator.
+     * @param prefix  The expression followed by NAND (A) the operator.
+     * @param postfix The expression following the NAND (A) operator.
      */
     protected Nand(Expression prefix, Expression postfix) {
         super(prefix, postfix);
@@ -115,8 +120,23 @@ public class Nand extends BinaryExpression{
         );
     }
 
+    /**
+     * Returned a simplified version of the current expression.
+     *
+     * @return Simplified version of the expression.
+     */
+    @Override
+    public Expression simplify() throws Exception {
+        /*
+         * Since the simplified form of NAND, is negated to the simplified form
+         * of AND we will create a correct form for our purpose.
+         */
+        And helper = new And(prefix,postfix);
+        return new Not(helper.simplify());
+    }
+
     @Override
     public String toString() {
-        return "("+prefix+" ↑ "+postfix+")";
+        return "("+prefix+" A "+postfix+")";
     }
 }

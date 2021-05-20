@@ -1,5 +1,10 @@
 import java.util.*;
 
+/**
+ * @author Amiram Yassif
+ * 314985474
+ * ASS4
+ */
 public class Xor extends BinaryExpression{
     /**
      * Solves a simple XOR expression.
@@ -134,6 +139,53 @@ public class Xor extends BinaryExpression{
                         ,super.postfix.norify()
                 )
         );
+    }
+
+    /**
+     /**
+     * Returned a simplified version of the current expression.
+     *
+     * @return Simplified version of the expression.
+     */
+    @Override
+    public Expression simplify() throws Exception {
+        // Store simplified data, and get each type (Val, Var, Complex).
+        Expression prefixExpressionSimplified = this.prefix.simplify();
+        ExpressionType prefixType
+                = Expression.getExpressionType(prefixExpressionSimplified);
+        Expression postfixExpressionSimplified = this.postfix.simplify();
+        ExpressionType postfixType
+                = Expression.getExpressionType(postfixExpressionSimplified);
+        // If "expression ^ expression" occurs, return False (x^x=F).
+        if (prefixExpressionSimplified.equals(postfixExpressionSimplified))
+            return new Val(false);
+        // If both expressions are Vals, an evaluation can be made. Return it.
+        if (prefixType == ExpressionType.Val
+                && postfixType == ExpressionType.Val)
+            return new Val(this.evaluate());
+        // If (expression ^ F) occurs, return expression (e ^ F = e).
+        if (prefixType == ExpressionType.Val){
+            if(prefixExpressionSimplified.toString().equals(FALSE_EXPRESSION))
+                return postfixExpressionSimplified;
+                // Otherwise wh have a (expression ^ T) situation.
+            else
+                // Return true (e ^ T = ~T)
+                return new Not(postfixExpressionSimplified);
+        }
+        //Same method as before, but for the postfix.
+        if (postfixType == ExpressionType.Val){
+            if(postfixExpressionSimplified.toString().equals(FALSE_EXPRESSION))
+                return prefixExpressionSimplified;
+                // Otherwise wh have a (expression ^ T) situation.
+            else
+                // Return true (e ^ T = ~T)
+                return new Not(prefixExpressionSimplified);
+        }
+        /*
+         *   If non of the situations above has occurred,
+         *   no simplification can be made. So no changes will be made.
+         */
+        return new Xor(prefixExpressionSimplified,postfixExpressionSimplified);
     }
 
     @Override

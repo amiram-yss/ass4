@@ -98,8 +98,32 @@ public class Val implements Expression{
         return this;
     }
 
+    /**
+     * Returned a simplified version of the current expression.
+     *
+     * @return Simplified version of the expression.
+     */
+    @Override
+    public Expression simplify() {
+        return this;
+    }
+
+    /**
+     * Returns a nice string representation of the expression.
+     * @return A nice string representation of the expression.
+     */
     @Override
     public String toString() {
         return value ? "T" : "F";
+    }
+
+    /**
+     * Checks if two expressions are equal.
+     * @param e     The expression
+     * @return      True if has equal variables, False otherwise.
+     */
+    @Override
+    public boolean equals(Expression e) {
+        return this.toString().equals(e.toString());
     }
 }

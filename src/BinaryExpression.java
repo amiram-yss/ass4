@@ -5,6 +5,11 @@
  */
 public abstract class BinaryExpression extends BaseExpression {
 
+
+
+    /**
+     * Properties
+     */
     protected Expression prefix;
     /**
      * Constructor.

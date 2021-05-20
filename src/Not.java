@@ -95,6 +95,16 @@ public class Not extends UnaryExpression{
         );
     }
 
+    /**
+     * Returned a simplified version of the current expression.
+     *
+     * @return Simplified version of the expression.
+     */
+    @Override
+    public Expression simplify() {
+        return null;
+    }
+
     @Override
     public String toString() {
         return "~(" + postfix + ")";
