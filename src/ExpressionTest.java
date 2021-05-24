@@ -39,5 +39,6 @@ public class ExpressionTest {
         System.out.println(e.norify());
         // Print simplified expression of the expression.
         System.out.println(e.simplify());
+        e = new Xor(new Var("x"), new Var("y"));
     }
 }

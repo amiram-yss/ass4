@@ -101,8 +101,20 @@ public class Not extends UnaryExpression {
      * @throws Exception    If simplify() throws an exception
      */
     @Override
-    public Expression simplify() throws Exception {
-        return new Not(super.getPostfix().simplify());
+    public Expression simplify() {
+        try {
+            Expression simplifiedPostFix = super.getPostfix().simplify();
+            ExpressionType postfixType = Expression.
+                    getExpressionType(simplifiedPostFix);
+            //If both expression is a Val, an evaluation can be made. Return it.
+            if (postfixType == ExpressionType.Val) {
+                return new Val(this.evaluate());
+            }
+            return new Not(super.getPostfix().simplify());
+        } catch (Exception e) {
+            System.out.println("Error simplifying: " + this.toString());
+            return null;
+        }
     }
 
     @Override

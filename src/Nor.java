@@ -135,7 +135,7 @@ public class Nor extends BinaryExpression {
      * @return Simplified version of the expression.
      */
     @Override
-    public Expression simplify() throws Exception {
+    public Expression simplify() {
         /*
          * Since the simplified form of NOR, is negated to the simplified form
          * of OR we will create a correct form for our purpose.

@@ -142,28 +142,33 @@ public class Xnor extends BinaryExpression {
      * @return Simplified version of the expression.
      */
     @Override
-    public Expression simplify() throws Exception {
-        // Store simplified data, and get each type (Val, Var, Complex).
-        Expression prefixExpressionSimplified = this.getPrefix().simplify();
-        ExpressionType prefixType
-                = Expression.getExpressionType(prefixExpressionSimplified);
-        Expression postfixExpressionSimplified = this.getPostfix().simplify();
-        ExpressionType postfixType
-                = Expression.getExpressionType(postfixExpressionSimplified);
-        // If "expression & expression" occurs, return "expression" (x&x=x).
-        if (prefixExpressionSimplified.equals(postfixExpressionSimplified)) {
-            return postfixExpressionSimplified;
+    public Expression simplify() {
+        try {
+            // Store simplified data, and get each type (Val, Var, Complex).
+            Expression prefixExpressionSimplified = this.getPrefix().simplify();
+            ExpressionType prefixType
+                    = Expression.getExpressionType(prefixExpressionSimplified);
+            Expression postfixExpressionSimplified = this.getPostfix().simplify();
+            ExpressionType postfixType
+                    = Expression.getExpressionType(postfixExpressionSimplified);
+            // If "expression & expression" occurs, return "expression" (x&x=x).
+            if (prefixExpressionSimplified.equals(postfixExpressionSimplified)) {
+                return postfixExpressionSimplified;
+            }
+            // If both expressions are Vals, an evaluation can be made. Return it.
+            if (prefixType == ExpressionType.Val
+                    && postfixType == ExpressionType.Val) {
+                return new Val(this.evaluate());
+            }
+            /*
+             *   If non of the situations above has occurred,
+             *   no simplification can be made. So no changes will be made.
+             */
+            return new Xor(prefixExpressionSimplified, postfixExpressionSimplified);
+        } catch (Exception e) {
+            System.out.println("Error simplifying: " + this.toString());
+            return null;
         }
-        // If both expressions are Vals, an evaluation can be made. Return it.
-        if (prefixType == ExpressionType.Val
-                && postfixType == ExpressionType.Val) {
-            return new Val(this.evaluate());
-        }
-        /*
-         *   If non of the situations above has occurred,
-         *   no simplification can be made. So no changes will be made.
-         */
-        return new Xor(prefixExpressionSimplified, postfixExpressionSimplified);
     }
 
     @Override

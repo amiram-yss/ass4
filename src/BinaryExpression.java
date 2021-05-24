@@ -5,7 +5,6 @@
  */
 public abstract class BinaryExpression extends BaseExpression {
 
-
     /**
      * Properties.
      */

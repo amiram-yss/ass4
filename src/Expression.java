@@ -85,7 +85,7 @@ public interface Expression {
      * @throws Exception In case of evaluate() failure.
      * @return Simplified version of the expression.
      */
-    Expression simplify() throws Exception;
+    Expression simplify();
 
     /**
      * Checks if two expressions are equal.

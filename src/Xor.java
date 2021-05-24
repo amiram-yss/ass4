@@ -154,7 +154,8 @@ public class Xor extends BinaryExpression {
      * @return Simplified version of the expression.
      */
     @Override
-    public Expression simplify() throws Exception {
+    public Expression simplify() {
+        try {
         // Store simplified data, and get each type (Val, Var, Complex).
         Expression prefixExpressionSimplified = this.getPrefix().simplify();
         ExpressionType prefixType
@@ -196,6 +197,10 @@ public class Xor extends BinaryExpression {
          *   no simplification can be made. So no changes will be made.
          */
         return new Xor(prefixExpressionSimplified, postfixExpressionSimplified);
+        } catch (Exception e) {
+            System.out.println("Error simplifying: " + this.toString());
+            return null;
+        }
     }
 
     @Override
