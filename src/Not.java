@@ -98,10 +98,11 @@ public class Not extends UnaryExpression {
      * Returned a simplified version of the current expression.
      *
      * @return Simplified version of the expression.
+     * @throws Exception    If simplify() throws an exception
      */
     @Override
-    public Expression simplify() {
-        return null;
+    public Expression simplify() throws Exception {
+        return new Not(super.getPostfix().simplify());
     }
 
     @Override
