@@ -131,12 +131,33 @@ public class Nand extends BinaryExpression {
      */
     @Override
     public Expression simplify() {
+        // Store simplified expressions.
+        Expression prefixSimplified = getPrefix().simplify();
+        Expression postfixSimplified = getPostfix().simplify();
+        ExpressionType prefixType = Expression.getExpressionType(
+                prefixSimplified);
+        ExpressionType postfixType = Expression.getExpressionType(
+                postfixSimplified);
+        //If both params are equal, return negative of one of them.
+        if (prefixSimplified.toString().equals(postfixSimplified.toString())) {
+            return new Not(prefixSimplified);
+        }
         /*
          * Since the simplified form of NAND, is negated to the simplified form
          * of AND we will create a correct form for our purpose.
          */
-        And helper = new And(getPrefix(), getPostfix());
-        return new Not(helper.simplify());
+        if (prefixType == ExpressionType.Val
+                || postfixType == ExpressionType.Val) {
+            return new Not(
+                    new And(
+                            getPrefix().simplify(),
+                            getPostfix().simplify()
+                    )
+            );
+        }
+        //No simplification is made.
+        return new Nand(prefixSimplified, postfixSimplified);
+        //return this;
     }
 
     @Override

@@ -29,15 +29,21 @@ public class Ass4 {
         expressions.add(new Not(new Xor(new And(new Val(true), new Or(new Var("x"), new Var("y"))), new Var("x"))));
 
         for (int i = 0; i < expressions.size(); i++) {
+            if (i == 7) {
+                i = 7;
+            }
             Expression e = expressions.get(i);
             if (i != 0) {
                 System.out.println();
             }
             System.out.println(i + ":\n");
+            if (i == 5) {
+                i = 5;
+            }
             System.out.println(e + "\n");
             System.out.println(e.nandify() + "\n");
-            System.out.println("V?");
             System.out.println(e.nandify().simplify() + "\n");
+            System.out.println("V?");
             System.out.println(e.norify() + "\n");
             System.out.println("V?");
             System.out.println(e.norify().simplify() + "\n");

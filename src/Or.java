@@ -128,7 +128,6 @@ public class Or extends BinaryExpression {
      */
     @Override
     public Expression simplify() {
-        try {
         // Store simplified data, and get each type (Val, Var, Complex).
         Expression prefixExpressionSimplified = this.getPrefix().simplify();
         ExpressionType prefixType
@@ -143,7 +142,10 @@ public class Or extends BinaryExpression {
         // If both expressions are Vals, an evaluation can be made. Return it.
         if (prefixType == ExpressionType.Val
                 && postfixType == ExpressionType.Val) {
-            return new Val(this.evaluate());
+            try {
+                return new Val(this.evaluate());
+            } catch (Exception e) {
+            }
         }
         // If (expression | F) occurs, return expression (e | F = e).
         if (prefixType == ExpressionType.Val) {
@@ -167,11 +169,7 @@ public class Or extends BinaryExpression {
             If non of the situations above has occurred,
             no simplification can be made. So no changes will be made.
          */
-        return new Or(prefixExpressionSimplified, postfixExpressionSimplified);
-        } catch (Exception e) {
-            System.out.println("Error simplifying: " + this.toString());
-            return null;
-        }
+        return this;
     }
 
     @Override
