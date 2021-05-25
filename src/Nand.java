@@ -152,7 +152,7 @@ public class Nand extends BinaryExpression {
                     new And(
                             getPrefix().simplify(),
                             getPostfix().simplify()
-                    )
+                    ).simplify()
             );
         }
         //No simplification is made.

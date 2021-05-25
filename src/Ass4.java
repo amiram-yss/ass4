@@ -9,9 +9,16 @@ import java.util.TreeMap;
 public class Ass4 {
     /**
      * .
+     */
+    public static void nop() {
+        return;
+    }
+    /**
+     * .
      * @param args .
      */
     public static void main(String[] args) {
+        boolean debug = false;
         List<Expression> expressions = new ArrayList<>();
         Var x = new Var("x");
         Var y = new Var("y");
@@ -37,15 +44,16 @@ public class Ass4 {
                 System.out.println();
             }
             System.out.println(i + ":\n");
-            if (i == 5) {
-                i = 5;
+            if (i == 7) {
+                debug = true;
             }
             System.out.println(e + "\n");
             System.out.println(e.nandify() + "\n");
+            if (debug) {
+                nop();
+            }
             System.out.println(e.nandify().simplify() + "\n");
-            System.out.println("V?");
             System.out.println(e.norify() + "\n");
-            System.out.println("V?");
             System.out.println(e.norify().simplify() + "\n");
             Expression tmp = e.assign("x", new Xnor(z, new Val(false)));
             System.out.println(tmp + "\n");
