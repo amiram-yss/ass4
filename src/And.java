@@ -33,6 +33,7 @@ public class And extends BinaryExpression {
      */
     @Override
     public Boolean evaluate(Map<String, Boolean> assignment) throws Exception {
+        // Evaluates recursively.
         return super.getPrefix().evaluate(assignment)
                 && super.getPostfix().evaluate(assignment);
     }
@@ -46,6 +47,7 @@ public class And extends BinaryExpression {
      */
     @Override
     public Boolean evaluate() throws Exception {
+        // Evaluates recursively.
         return super.getPrefix().evaluate() && super.getPostfix().evaluate();
     }
 

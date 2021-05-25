@@ -117,17 +117,10 @@ public class Nor extends BinaryExpression {
      */
     @Override
     public Expression norify() {
-        /*return new Nor(
-                new Xnor(
-                        super.getPrefix().norify(),
-                        super.getPostfix().norify()
-                ).norify(),
-                new Xnor(
-                        super.getPrefix().norify(),
-                        super.getPostfix().norify()
-                ).norify()
-                );*/
-        return new Nor(getPrefix().norify(), getPostfix().norify());
+        return new Nor(
+                getPrefix().norify(),
+                getPostfix().norify()
+        );
     }
 
     /**

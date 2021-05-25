@@ -89,7 +89,11 @@ public class Nand extends BinaryExpression {
      */
     @Override
     public Expression nandify() {
-        return this;
+        return new Nand(
+                super.getPrefix().nandify(),
+                super.getPostfix().nandify()
+        );
+        //return this;
     }
 
     /**

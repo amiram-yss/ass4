@@ -78,6 +78,7 @@ public class Not extends UnaryExpression {
      */
     @Override
     public Expression nandify() {
+        // Logic: ~x = x NAND x.
         return new Nand(super.getPostfix().nandify(), super.getPostfix().nandify());
     }
 
