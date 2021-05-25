@@ -144,13 +144,9 @@ public class Nor extends BinaryExpression {
                 prefixSimplified);
         ExpressionType postfixType = Expression.getExpressionType(
                 postfixSimplified);
-        //If both params are equal, return one of them.
-        if (prefixSimplified.toString().equals(postfixSimplified.toString())) {
-            return new Not(prefixSimplified);
-        }
         /*
          * Since the simplified form of NAND, is negated to the simplified form
-         * of AND we will create a correct form for our purpose.
+         * of OR we will create a correct form for our purpose.
          */
         if (prefixType == ExpressionType.Val
                 || postfixType == ExpressionType.Val) {
@@ -158,8 +154,12 @@ public class Nor extends BinaryExpression {
                     new Or(
                             getPrefix().simplify(),
                             getPostfix().simplify()
-                    )
-            );
+                    ).simplify()
+            ).simplify();
+        }
+        //If both params are equal, return one of them.
+        if (prefixSimplified.toString().equals(postfixSimplified.toString())) {
+            return new Not(prefixSimplified);
         }
         //No simplification is made.
         return new Nor(prefixSimplified, postfixSimplified);
