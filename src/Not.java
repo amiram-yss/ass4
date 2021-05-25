@@ -78,7 +78,7 @@ public class Not extends UnaryExpression {
      */
     @Override
     public Expression nandify() {
-        // Logic: ~x = x NAND x.
+        // Logic: ~A = A NAND A.
         return new Nand(super.getPostfix().nandify(), super.getPostfix().nandify());
     }
 
@@ -90,6 +90,7 @@ public class Not extends UnaryExpression {
      */
     @Override
     public Expression norify() {
+        // Logic: ~A = A NOR A
         return new Nor(
                 super.getPostfix().norify(), super.getPostfix().norify()
         );

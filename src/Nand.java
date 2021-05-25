@@ -89,11 +89,11 @@ public class Nand extends BinaryExpression {
      */
     @Override
     public Expression nandify() {
+        // Returns recursively the next 2 params nandified.
         return new Nand(
                 super.getPrefix().nandify(),
                 super.getPostfix().nandify()
         );
-        //return this;
     }
 
     /**
@@ -104,6 +104,9 @@ public class Nand extends BinaryExpression {
      */
     @Override
     public Expression norify() {
+        /* Logic: A NAND B = [ ( A NOR A ) NOR ( B NOR B ) ] NOR [ ( A NOR A )
+         * NOR ( B NOR B ) ]
+        */
         return new Nor(
                 new Nor(
                         new Nor(

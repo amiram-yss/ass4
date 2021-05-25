@@ -102,6 +102,11 @@ public class Xnor extends BinaryExpression {
      */
     @Override
     public Expression nandify() {
+        /* Logic: A XNOR B = { [ A NAND ( A NAND B ) ] NAND
+         * [ B NAND ( A NAND B ) ] } NAND
+         * { [ A NAND ( A NAND B ) ]
+         * NAND [ B NAND ( A NAND B ) ] }
+         */
         Expression a = super.getPrefix().nandify();
         Expression b = super.getPostfix().nandify();
         return new Nand(
@@ -121,6 +126,7 @@ public class Xnor extends BinaryExpression {
      */
     @Override
     public Expression norify() {
+        // Logic: A XNOR B = [ A NOR ( A NOR B ) ] NOR [ B NOR ( A NOR B ) ]
         return new Nor(
                 new Nor(
                         super.getPrefix().norify(),

@@ -91,6 +91,7 @@ public class And extends BinaryExpression {
      */
     @Override
     public Expression nandify() {
+        //Logic: A AND B = ( A NAND B ) NAND ( A NAND B )
         return new Nand(
                 new Nand(
                         super.getPrefix().nandify(),
@@ -111,6 +112,7 @@ public class And extends BinaryExpression {
      */
     @Override
     public Expression norify() {
+        // Logic: ( A NOR A ) NOR ( B NOR B )
         return new Nor(
                 new Nor(
                         super.getPrefix().norify(),

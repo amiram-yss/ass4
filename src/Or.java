@@ -89,6 +89,7 @@ public class Or extends BinaryExpression {
      */
     @Override
     public Expression nandify() {
+        //Logic: A OR B = ( A NAND A ) NAND ( B NAND B )
         return new Nand(
                 new Nand(
                         super.getPrefix().nandify(),
@@ -109,6 +110,7 @@ public class Or extends BinaryExpression {
      */
     @Override
     public Expression norify() {
+        // Logic: A OR B ( A NOR B ) NOR ( A NOR B )
         return new Nor(
                 new Nor(
                         super.getPrefix().norify(),

@@ -6,7 +6,6 @@ import java.util.Map;
  * @author Amiram Yassif
  * 314985474
  * ASS4
- * @version 0.1
  */
 public class Val implements Expression {
     /**

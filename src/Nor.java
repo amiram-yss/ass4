@@ -88,6 +88,10 @@ public class Nor extends BinaryExpression {
      */
     @Override
     public Expression nandify() {
+        /*
+         * Logic: A NOR B
+         * =[(A NAND A) NAND (B NAND B)] NAND [(A NAND A) NAND (B NAND B)]
+         */
         return new Nand(
                 new Nand(
                         new Nand(

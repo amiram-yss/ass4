@@ -103,6 +103,7 @@ public class Xor extends BinaryExpression {
      */
     @Override
     public Expression nandify() {
+        //A XOR B = [ A NAND ( A NAND B ) ] NAND [ B NAND ( A NAND B ) ]
         return new Nand(
                 new Nand(
                         super.getPrefix().nandify(),
