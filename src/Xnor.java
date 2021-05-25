@@ -153,25 +153,27 @@ public class Xnor extends BinaryExpression {
         Expression postfixExpressionSimplified = this.getPostfix().simplify();
         ExpressionType postfixType
                 = Expression.getExpressionType(postfixExpressionSimplified);
-        // If "expression & expression" occurs, return "expression" (x&x=x).
-        if (prefixExpressionSimplified.equals(postfixExpressionSimplified)) {
-            return new Not(postfixExpressionSimplified);
-        }
         // If both expressions are Vals, an evaluation can be made. Return it.
         if (prefixType == ExpressionType.Val
-                || postfixType == ExpressionType.Val) {
+                && postfixType == ExpressionType.Val) {
             return new Not(
                     new Xor(
                             getPrefix().simplify(),
                             getPostfix().simplify()
-                    )
-            );
+                    ).simplify()
+            ).simplify();
+        }
+        // If "expression & expression" occurs, return "expression" (x#x=T).
+        if (prefixExpressionSimplified.equals(postfixExpressionSimplified)) {
+            return new Val(true);
         }
         /*
          *   If non of the situations above has occurred,
          *   no simplification can be made. So no changes will be made.
          */
-        return new Xor(prefixExpressionSimplified, postfixExpressionSimplified);
+        return new Xnor(
+                prefixExpressionSimplified,
+                postfixExpressionSimplified);
     }
 
     @Override

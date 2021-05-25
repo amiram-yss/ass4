@@ -33,7 +33,7 @@ public class Nand extends BinaryExpression {
      */
     @Override
     public Boolean evaluate(Map<String, Boolean> assignment) throws Exception {
-        return !(super.getPostfix().evaluate(assignment)
+        return !(super.getPrefix().evaluate(assignment)
                 && super.getPostfix().evaluate(assignment));
     }
 
@@ -138,10 +138,6 @@ public class Nand extends BinaryExpression {
                 prefixSimplified);
         ExpressionType postfixType = Expression.getExpressionType(
                 postfixSimplified);
-        //If both params are equal, return negative of one of them.
-        if (prefixSimplified.toString().equals(postfixSimplified.toString())) {
-            return new Not(prefixSimplified);
-        }
         /*
          * Since the simplified form of NAND, is negated to the simplified form
          * of AND we will create a correct form for our purpose.
@@ -153,7 +149,11 @@ public class Nand extends BinaryExpression {
                             getPrefix().simplify(),
                             getPostfix().simplify()
                     ).simplify()
-            );
+            ).simplify();
+        }
+        //If both params are equal, return negative of one of them.
+        if (prefixSimplified.toString().equals(postfixSimplified.toString())) {
+            return new Not(prefixSimplified);
         }
         //No simplification is made.
         return new Nand(prefixSimplified, postfixSimplified);

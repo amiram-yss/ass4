@@ -46,7 +46,7 @@ public class And extends BinaryExpression {
      */
     @Override
     public Boolean evaluate() throws Exception {
-        return super.getPostfix().evaluate() && super.getPostfix().evaluate();
+        return super.getPrefix().evaluate() && super.getPostfix().evaluate();
     }
 
     /**
@@ -145,6 +145,7 @@ public class And extends BinaryExpression {
             try {
                 return new Val(this.evaluate());
             } catch (Exception e) {
+                //Unreachable
             }
         }
         // If (expression & T) occurs, return expression (e & T = e).
@@ -170,7 +171,7 @@ public class And extends BinaryExpression {
             If non of the situations above has occurred,
             no simplification can be made. So no changes will be made.
          */
-        return this;
+        return new And(prefixExpressionSimplified, postfixExpressionSimplified);
     }
 
     @Override

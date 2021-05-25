@@ -198,7 +198,7 @@ public class Xor extends BinaryExpression {
          *   If non of the situations above has occurred,
          *   no simplification can be made. So no changes will be made.
          */
-        return this;
+        return new Xor(prefixExpressionSimplified, postfixExpressionSimplified);
     }
 
     @Override
