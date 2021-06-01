@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3d32f6e-f6e6-4d48-a558-4c2e1adbb228" name="Default Changelist" comment="Version 0.1&#10;Part 1 completed and tested.">
+    <list default="true" id="b3d32f6e-f6e6-4d48-a558-4c2e1adbb228" name="Default Changelist" comment="Version 0.2&#10;Part 1+2 completed and tested.">
       <change beforePath="$PROJECT_DIR$/ass5.iws" beforeDir="false" afterPath="$PROJECT_DIR$/ass5.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ass5/Ball.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ass5/Ball.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ass5/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ass5/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ass5/GameEnvironment.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ass5/GameEnvironment.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +100,21 @@
       <option name="project" value="LOCAL" />
       <updated>1622571678284</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Version 0.2&#10;Part 1+2 completed and tested.">
+      <created>1622579376679</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1622579376679</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Version 0.2&#10;Part 1+2 completed and tested.">
+      <created>1622579585171</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1622579585171</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -120,6 +132,18 @@
     <MESSAGE value="Version 0.0&#10;Starting point." />
     <MESSAGE value="Version 0.0.1&#10;Minor upgrades." />
     <MESSAGE value="Version 0.1&#10;Part 1 completed and tested." />
-    <option name="LAST_COMMIT_MESSAGE" value="Version 0.1&#10;Part 1 completed and tested." />
+    <MESSAGE value="Version 0.2&#10;Part 1+2 completed and tested." />
+    <option name="LAST_COMMIT_MESSAGE" value="Version 0.2&#10;Part 1+2 completed and tested." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$USER_HOME$/OneDrive - Bar-Ilan University/לימודים/תשפא/ב/מונחה עצמות/ass5/src/Game.java</url>
+          <line>90</line>
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
