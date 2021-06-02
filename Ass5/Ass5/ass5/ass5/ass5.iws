@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3d32f6e-f6e6-4d48-a558-4c2e1adbb228" name="Default Changelist" comment="Version 0.2&#10;Part 1+2 completed and tested.">
+    <list default="true" id="b3d32f6e-f6e6-4d48-a558-4c2e1adbb228" name="Default Changelist" comment="Version 1.0&#10;All parts are completed.&#10;TODO: Coding style, check if the whole field needs to be lowered for the score, check that the score tab isn't too tiny.&#10;Well done. It's a good time to take a nap :)">
+      <change beforePath="$PROJECT_DIR$/ass5.ipr" beforeDir="false" afterPath="$PROJECT_DIR$/ass5.ipr" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ass5.iws" beforeDir="false" afterPath="$PROJECT_DIR$/ass5.iws" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/ass5/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ass5/Game.class" afterDir="false" />
     </list>
@@ -41,12 +42,12 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/out/production/ass5/biuoop-1.4.jar" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/biuoop.xml" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="org.infernus.idea.checkstyle.CheckStyleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -56,7 +57,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Ass5Game">
     <configuration name="Ass3Game" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Ass3Game" />
       <module name="ass5" />
@@ -64,8 +65,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Ass5Game" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Ass5Game" />
+      <module name="ass5" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Ass5Game" />
         <item itemvalue="Application.Ass3Game" />
       </list>
     </recent_temporary>
@@ -114,7 +123,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622579585171</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Version 1.0&#10;All parts are completed.&#10;TODO: Coding style, check if the whole field needs to be lowered for the score, check that the score tab isn't too tiny.&#10;Well done. It's a good time to take a nap :)">
+      <created>1622582198194</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1622582198194</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -127,23 +143,18 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Version 0.0&#10;Starting point." />
     <MESSAGE value="Version 0.0.1&#10;Minor upgrades." />
     <MESSAGE value="Version 0.1&#10;Part 1 completed and tested." />
     <MESSAGE value="Version 0.2&#10;Part 1+2 completed and tested." />
-    <option name="LAST_COMMIT_MESSAGE" value="Version 0.2&#10;Part 1+2 completed and tested." />
+    <MESSAGE value="Version 1.0&#10;All parts are completed.&#10;TODO: Coding style, check if the whole field needs to be lowered for the score, check that the score tab isn't too tiny.&#10;Well done. It's a good time to take a nap :)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version 1.0&#10;All parts are completed.&#10;TODO: Coding style, check if the whole field needs to be lowered for the score, check that the score tab isn't too tiny.&#10;Well done. It's a good time to take a nap :)" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$USER_HOME$/OneDrive - Bar-Ilan University/לימודים/תשפא/ב/מונחה עצמות/ass5/src/Game.java</url>
-          <line>90</line>
-          <option name="timeStamp" value="44" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
