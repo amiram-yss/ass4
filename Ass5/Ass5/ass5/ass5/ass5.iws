@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3d32f6e-f6e6-4d48-a558-4c2e1adbb228" name="Default Changelist" comment="Version 1.1.1&#10;Started to make some style.&#10;Before making ball.removeFromGame(game) functional.">
-      <change beforePath="$PROJECT_DIR$/ass5.iws" beforeDir="false" afterPath="$PROJECT_DIR$/ass5.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ass5/Ball.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ass5/Ball.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ass5/BallRemover.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ass5/BallRemover.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/ass5/Block.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/ass5/Block.class" afterDir="false" />
-    </list>
+    <list default="true" id="b3d32f6e-f6e6-4d48-a558-4c2e1adbb228" name="Default Changelist" comment="Version 1.2&#10;Completed assignment 5." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -145,7 +140,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622978041736</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Version 1.2&#10;Completed assignment 5.">
+      <created>1622989560333</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1622989560333</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -168,7 +170,8 @@
     <MESSAGE value="Version 1.0&#10;All parts are completed.&#10;TODO: Coding style, check if the whole field needs to be lowered for the score, check that the score tab isn't too tiny.&#10;Well done. It's a good time to take a nap :)" />
     <MESSAGE value="Version 1.1&#10;Started to make some style." />
     <MESSAGE value="Version 1.1.1&#10;Started to make some style.&#10;Before making ball.removeFromGame(game) functional." />
-    <option name="LAST_COMMIT_MESSAGE" value="Version 1.1.1&#10;Started to make some style.&#10;Before making ball.removeFromGame(game) functional." />
+    <MESSAGE value="Version 1.2&#10;Completed assignment 5." />
+    <option name="LAST_COMMIT_MESSAGE" value="Version 1.2&#10;Completed assignment 5." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
